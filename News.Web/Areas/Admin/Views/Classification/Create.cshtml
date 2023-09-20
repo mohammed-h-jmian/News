@@ -1,0 +1,33 @@
+﻿@model CreateClassificationDto ;
+
+<form action="~/Admin/Classification/Create" method="post" enctype="multipart/form-data">
+    <div class="">
+        <div>
+
+            <div class="">
+                <div>
+                    <h5>Create New Classification </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input required asp-for="Name" type="text" class="form-control">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn_1 medium">Save</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+

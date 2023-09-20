@@ -1,0 +1,96 @@
+﻿@model List<NewsViewModel>;
+
+@{
+    ViewData["Title"] = "News Page";
+}
+
+@section Css{
+
+}
+@section Scripts{
+    <script src="~/AdminSection/js/admin-datatables.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Admin">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">News</li>
+    </ol>
+
+    <!-- Example DataTables Card-->
+    <div class="card mb-3">
+        <div class="row card-header" style="
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
+">
+            <div>
+                <i class="fa fa-table"></i> News Table
+            </div>
+            <a href="~/Admin/News/Create" class="btn_1" >
+                <i class="fa fa-plus-square"></i> Add New News
+            </a>
+        </div>
+     
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Classification</th>
+                            <th>Img</th>
+                            <th>Created At</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Classification</th>
+                            <th>Img</th>
+                            <th>Created At</th>
+                            <th>Operations</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            foreach (var news in Model)
+                            {
+                                <tr>
+                                    <td>@news.Id</td>
+                                    <td><strong>@news.Name</strong></td>
+                                    <td>@news.Description</td>
+                                    <td><a href="~/Admin/Classification/Details/@news.Classification.Id">@news.Classification.Name</a></td>
+                                    <td><a href="~/Admin/News/Details/@news.Id"><img src="@news.ImagePath" alt="" style="width:100px;"></a></td>
+                                    <td>@news.CreatedAt</td>
+                                    <td>
+                                        <a href="~/Admin/News/Delete/@news.Id" onclick="return confirm('Are you sure you want to delete @news.Id ?');"><strong>Delete</strong></a> |
+                                        <a href="~/Admin/News/Edit/@news.Id"><strong>Edit</strong></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /tables-->
+</div>
+
+

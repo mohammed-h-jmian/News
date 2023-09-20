@@ -1,0 +1,151 @@
+﻿@model LandingViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Tranding news  carousel-->
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <aside class="wrapper__list__article">
+                    <h4 class="border_section">Last News</h4>
+                </aside>
+            </div>
+            <div class="col-md-12">
+                <div class="wrapp__list__article-responsive wrapp__list__article-responsive-carousel">
+
+                    @if (Model.News.Any())
+                    {
+                        foreach (var news in Model.News)
+                        {
+                            <div class="item">
+                                <!-- Post Article -->
+                                <div class="card__post card__post-list">
+                                    <div class="image-sm">
+                                        <a href="#">
+                                            <img src="@news.ImagePath" class="img-fluid" alt="">
+                                        </a>
+                                    </div>
+
+
+                                    <div class="card__post__body ">
+                                        <div class="card__post__content">
+
+                                            <div class="card__post__author-info mb-2">
+                                                <ul class="list-inline">
+
+                                                    <li class="list-inline-item">
+                                                        <span class="text-dark text-capitalize">
+                                                            @news.CreatedAt
+                                                        </span>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="card__post__title">
+                                                <h6>
+                                                    <a href="~/News/Details/@news.Id">
+                                                        @news.Name
+                                                    </a>
+                                                </h6>
+                                                <!-- <p class="d-none d-lg-block d-xl-block">
+                                                    Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat
+                                                    sollicitudin ut est. In fringilla dui dui.
+                                                </p> -->
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Tranding news carousel -->
+<!-- Popular news category -->
+<section class="pt-0">
+
+    @if (Model.Classifications.Any())
+    {
+        @foreach (var classification in Model.Classifications)
+        {
+            <!-- Post news carousel -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <aside class="wrapper__list__article">
+                            <a href="~/Classification/Details/@classification.Id">
+                                <h4 class="border_section">
+                                    @classification.Name
+                                </h4>
+                            </a>
+                        </aside>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="article__entry-carousel">
+
+                            @if (classification.News.Any())
+                            {
+                                @foreach (var news in classification.News)
+                                {
+                                    <div class="item">
+                                        <!-- Post Article -->
+                                        <div class="article__entry">
+                                            <div class="article__image">
+                                                <a href="~/News/Details/@news.Id">
+                                                    @*<img src="images/newsimage17.png" alt="" class="img-fluid">*@
+                                                    <img src="@news.ImagePath" width="145px" alt="" class="img-fluid">
+                                                </a>
+                                            </div>
+                                            <div class="article__content">
+                                                <ul class="list-inline">
+
+                                                    <li class="list-inline-item">
+                                                        <span>
+                                                            @news.CreatedAt
+                                                        </span>
+                                                    </li>
+
+                                                </ul>
+                                                <h5>
+                                                    <a href="~/News/Details/@news.Id">
+                                                        @news.Name
+                                                    </a>
+                                                </h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Popular news category -->
+        }
+
+    }
+
+
+
+</section>
+<!-- End Popular news category -->

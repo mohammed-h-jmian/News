@@ -1,0 +1,98 @@
+﻿@model ClassificationViewModel;
+
+@{
+    ViewData["Title"] = "Classification Details";
+}
+
+@section Css{
+
+}
+@section Scripts{
+    <script src="~/AdminSection/vendor/bootstrap-datepicker.js"></script>
+    <script>$('input.date-pick').datepicker();</script>
+}
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Admin">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Classification</li>
+    </ol>
+    <div class="box_general pb-3">
+        <div class="header_box">
+            <h2 class="d-inline-block">
+                @Model.Name Details
+            </h2>
+        </div>
+        <div class="list_general order">
+            <ul>
+                <li>
+                    <figure><img src="img/item_1.jpg" alt=""></figure>
+                    <h4>
+                        @Model.Name
+                    </h4>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <h5>The news :</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Classification</th>
+                        <th>Img</th>
+                        <th>Created At</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Classification</th>
+                        <th>Img</th>
+                        <th>Created At</th>
+                        <th>Operations</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @if (Model.News.Any())
+                    {
+                        foreach (var news in Model.News)
+                        {
+                            <tr>
+                                <td>@news.Id</td>
+                                <td><strong>@news.Name</strong></td>
+                                <td>@news.Description</td>
+                                <td><a>@news.Classification.Name</a></td>
+                                <td><a href="~/Admin/News/Details/@news.Id"><img src="@news.ImagePath" alt="" style="width:100px;"></a></td>
+                                <td>@news.CreatedAt</td>
+                                <td>
+                                    <a href="~/Admin/News/Delete/@news.Id" onclick="return confirm('Are you sure you want to delete @news.Id ?');"><strong>Delete</strong></a> |
+                                    <a href="~/Admin/News/Edit/@news.Id"><strong>Edit</strong></a>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="table-responsive">
+            <!--Map-->
+            <div id="map"></div>
+        </div>
+
+    </div>
+</div>

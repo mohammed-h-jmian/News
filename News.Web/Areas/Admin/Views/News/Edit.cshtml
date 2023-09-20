@@ -1,0 +1,66 @@
+﻿@model UpdateNewsDto ;
+
+<form action="~/Admin/News/Edit/" method="post" enctype="multipart/form-data">
+    <div class="">
+        <div>
+            <input asp-for="Id" hidden value="@ViewBag.News.Id">
+
+            <div class="">
+                <div>
+                    <h5>Edit the News </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input required asp-for="Name" type="text" class="form-control" value="@ViewBag.News.Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input required asp-for="Description" type="text" class="form-control" value="@ViewBag.News.Description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Classification</label>
+                                @*<input required asp-for="CreateDto.City" type="text" class="form-control">*@
+                                <select class="form-control" asp-for="ClassificationId"
+                                        asp-items="@(new SelectList(ViewBag.ClassificationsSelectList, "Value", "Text"))" required>
+                                    <option value="">Select a Classification</option>
+                                </select>
+                                <span asp-validation-for="ClassificationId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input asp-for="Image" type="file" class="form-control">
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn_1 medium">Save</button>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</form>
+
